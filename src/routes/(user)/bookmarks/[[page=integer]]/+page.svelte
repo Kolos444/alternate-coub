@@ -59,7 +59,8 @@
 	{/if}
 </div>
 
-<style>div {
-	margin: 1rem
-}
+<style>
+	div {
+		margin: 1rem
+	}
 </style>

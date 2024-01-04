@@ -118,7 +118,7 @@
 
 <svelte:options accessors={true}/>
 
-<div>
+<div class="wrapper">
 	<video loop bind:this={video} on:click={playPause} on:canplaythrough={videoReadyEvent}>
 
 		<source src={coub.file_versions.html5.video.high.url}>
@@ -135,9 +135,8 @@
 </div>
 
 <style>
-	div {
+	.wrapper {
 		position: relative;
-		width: 100%;
 	}
 
 	video {

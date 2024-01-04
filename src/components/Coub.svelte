@@ -27,7 +27,6 @@
 	<VideoPlayer coub={coub} path={path} loggedIn={loggedIn} autoPlay={autoPlay} currentCoub={currentCoub} bind:this={videoPlayer}/>
 	<div class="row--one">
 		<h1>{coub.title}</h1>
-
 	</div>
 	<div class="row--two">
 		<Tags coub={coub}/>
@@ -53,30 +52,14 @@
 </div>
 
 <style>
-	.container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
+	.container{
 		width: 80%;
 		margin: 0 auto;
-		max-height: 100vh;
 	}
 
-	h1 {
-		margin: 0;
-		text-align: center;
-	}
-
-	.row--one {
-		display: grid;
-		grid-template-columns: auto min-content min-content;
-		grid-column-gap: 1rem;
-		width: 100%;
-	}
-
-	.row--one > * {
-		justify-self: center;
-		align-self: center;
+	.row--one,.row--two{
+		margin: 0 auto;
+		width: max-content;
 	}
 
 	.row--two {
@@ -87,5 +70,9 @@
 		grid-column-gap: 1rem;
 		width: 100%;
 		align-items: center;
+	}
+
+	h1 {
+		margin: 0;
 	}
 </style>
