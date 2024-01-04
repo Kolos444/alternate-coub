@@ -51,7 +51,7 @@
 		pauseCoub();
 		setCoubTime(0);
 		playCoub();
-	};
+	}
 
 	/**
 	 * Starts playing Coub if paused and pauses if already playing.
@@ -137,10 +137,13 @@
 <style>
 	div {
 		position: relative;
+		width: 100%;
 	}
 
 	video {
-		height: 80vh;
-		max-width: 100%;
+		max-height: 800px;
+		height: auto;
+
+		width: 100%;
 	}
 </style>
