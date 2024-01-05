@@ -1,4 +1,5 @@
 <script lang="ts">
+
 	import type {Coub, CurrentCoub} from "$lib/types";
 	import {volume} from "../stores";
 	import VideoPlayerActions from "./VideoPlayerActions.svelte";
@@ -8,14 +9,10 @@
 	export let path: string;
 	export let loggedIn: boolean;
 	export let autoPlay = true;
-	export let currentCoub: CurrentCoub;
+	export let currentCoub: CurrentCoub | undefined = undefined;
 
 	let video: HTMLVideoElement;
 	let audio: HTMLAudioElement;
-
-	export function getVideo() {
-		return video;
-	}
 
 	let requestPlayback = false;
 
@@ -86,9 +83,11 @@
 
 	onMount(() => {
 		if (autoPlay) {
-			const observer = new IntersectionObserver((entries,) => {
+			const observer = new IntersectionObserver(
+				(entries,) => {
 					if (entries[0].isIntersecting) {
-						currentCoub.value = currentCoub.references.indexOf(coub.id);
+						if (currentCoub)
+							currentCoub.value = currentCoub?.references.indexOf(coub.id);
 
 						if (video.readyState !== 4 || audio.readyState !== 4) {
 							requestPlayback = true;
@@ -113,6 +112,7 @@
 				});
 			observer.observe(video);
 		}
+
 	});
 </script>
 
