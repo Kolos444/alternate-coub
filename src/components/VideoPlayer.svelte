@@ -1,4 +1,5 @@
 <script lang="ts">
+
 	import type {Coub, CurrentCoub} from "$lib/types";
 	import {volume} from "../stores";
 	import VideoPlayerActions from "./VideoPlayerActions.svelte";
@@ -8,14 +9,10 @@
 	export let path: string;
 	export let loggedIn: boolean;
 	export let autoPlay = true;
-	export let currentCoub: CurrentCoub;
+	export let currentCoub: CurrentCoub | undefined = undefined;
 
 	let video: HTMLVideoElement;
 	let audio: HTMLAudioElement;
-
-	export function getVideo() {
-		return video;
-	}
 
 	let requestPlayback = false;
 
@@ -51,7 +48,7 @@
 		pauseCoub();
 		setCoubTime(0);
 		playCoub();
-	};
+	}
 
 	/**
 	 * Starts playing Coub if paused and pauses if already playing.
@@ -86,9 +83,11 @@
 
 	onMount(() => {
 		if (autoPlay) {
-			const observer = new IntersectionObserver((entries,) => {
+			const observer = new IntersectionObserver(
+				(entries,) => {
 					if (entries[0].isIntersecting) {
-						currentCoub.value = currentCoub.references.indexOf(coub.id);
+						if (currentCoub)
+							currentCoub.value = currentCoub?.references.indexOf(coub.id);
 
 						if (video.readyState !== 4 || audio.readyState !== 4) {
 							requestPlayback = true;
@@ -113,12 +112,13 @@
 				});
 			observer.observe(video);
 		}
+
 	});
 </script>
 
 <svelte:options accessors={true}/>
 
-<div>
+<div class="wrapper">
 	<video loop bind:this={video} on:click={playPause} on:canplaythrough={videoReadyEvent}>
 
 		<source src={coub.file_versions.html5.video.high.url}>
@@ -135,12 +135,14 @@
 </div>
 
 <style>
-	div {
+	.wrapper {
 		position: relative;
 	}
 
 	video {
-		height: 80vh;
-		max-width: 100%;
+		max-height: 800px;
+		height: auto;
+
+		width: 100%;
 	}
 </style>

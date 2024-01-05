@@ -1,4 +1,6 @@
 import type {Actions} from "@sveltejs/kit";
+import type {PageServerLoad} from "./$types";
+import type {Root} from "$lib/types";
 
 export const actions = {
 	token: async ({cookies, request}) => {
@@ -67,3 +69,18 @@ export const actions = {
 		}
 	},
 } satisfies Actions;
+
+export const load: PageServerLoad = async ({fetch, params, setHeaders, cookies}) => {
+
+	const json: Root = await (
+		await fetch(
+			`https://coub.com/api/v2/timeline/subscriptions/quarter?page=1&per_page=25`, cookies.get("remember_token") ? {
+				headers: {
+					Cookie: `remember_token=${cookies.get("remember_token")}`
+				}
+			} : {}
+		)
+	).json();
+
+	return {root: json, validToken: !!cookies.get("remember_token"), page: 1};
+};
