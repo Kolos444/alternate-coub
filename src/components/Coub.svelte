@@ -13,12 +13,12 @@
 <svelte:options accessors={true}/>
 
 <div class="container">
-	<VideoPlayer coub={coub} path={path} loggedIn={loggedIn} autoPlay={autoPlay} currentCoub={currentCoub}/>
+	<VideoPlayer {coub} {path} loggedIn={loggedIn} autoPlay={autoPlay} {currentCoub}/>
 	<div class="row--one">
 		<a href="/coub/{coub.permalink}"><h1>{coub.title}</h1></a>
 	</div>
 	<div class="row--two">
-		<Tags coub={coub}/>
+		<Tags {coub}/>
 		<div>{ (coub.likes_count / (coub.likes_count + coub.dislikes_count)).toLocaleString("de-DE", {
 			style: "percent",
 			minimumFractionDigits: 2,
