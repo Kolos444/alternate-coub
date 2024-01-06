@@ -51,6 +51,14 @@
 		width: max-content;
 	}
 
+	.row--one {
+		margin-bottom: 0.5rem;
+	}
+
+	h1 {
+		margin: 0;
+	}
+
 	.row--two {
 		margin-top: 2px;
 
@@ -61,7 +69,5 @@
 		align-items: center;
 	}
 
-	h1 {
-		margin: 0;
-	}
+
 </style>

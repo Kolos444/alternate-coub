@@ -5,11 +5,15 @@
 </script>
 
 <div class="tags">
-	<div class="category-container">{coub.categories[0].title}</div>
+	<a href="#">
+		<div class="category-container">{coub.categories[0].title}</div>
+	</a>
 	{#each coub.tags as tag}
-		<div class="tag-container">
-			{tag.title}
-		</div>
+		<a href="#">
+			<div class="tag-container">
+				{tag.title}
+			</div>
+		</a>
 	{/each}
 </div>
 
@@ -18,22 +22,23 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.tag-container, .category-container {
+		border-radius: 10px;
+		padding: 3px 5px;
 	}
 
 	.category-container {
 		box-shadow: inset -13px -13px 30px yellow,
 		inset 33px 33px 30px yellowgreen;
 		color: black;
-		border-radius: 10px;
-		padding: 5px;
-		margin: 0 10px 0 0;
+		font-weight: 700;
 	}
 
 	.tag-container {
 		box-shadow: inset -13px -13px 30px royalblue,
 		inset 33px 33px 30px rebeccapurple;
-		border-radius: 10px;
-		padding: 5px;
-		margin: 0 10px 0 0;
 	}
 </style>
