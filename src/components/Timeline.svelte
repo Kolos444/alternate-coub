@@ -45,8 +45,7 @@
 				{#if i !== 0}
 					<hr/>
 				{/if}
-				<Coub coub={coub} path="../" loggedIn={data.validToken} autoPlay={true} currentCoub={currentCoub}
-					  bind:this={coubs[i]}/>
+				<Coub {coub} path="../" loggedIn={data.validToken} autoPlay={true} {currentCoub} bind:this={coubs[i]}/>
 			{/key}
 		{/each}
 	{/if}
