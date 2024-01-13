@@ -14,6 +14,10 @@
 	let video: HTMLVideoElement;
 	let audio: HTMLAudioElement;
 
+	export const getVideoElement = () => {
+		return video;
+	};
+
 	let requestPlayback = false;
 
 	/**
@@ -53,7 +57,7 @@
 	/**
 	 * Starts playing Coub if paused and pauses if already playing.
 	 */
-	const playPause = () => {
+	export const playPause = () => {
 
 		if (video.paused) {
 			if (video.readyState === 4 && audio.readyState === 4) {
@@ -82,12 +86,17 @@
 		})();
 
 	onMount(() => {
+		console.log("test");
 		if (autoPlay) {
 			const observer = new IntersectionObserver(
 				(entries,) => {
 					if (entries[0].isIntersecting) {
-						if (currentCoub)
-							currentCoub.value = currentCoub?.references.indexOf(coub.id);
+						if (currentCoub) {
+							console.log("test",currentCoub.references.indexOf(coub.id),currentCoub,coub.id);
+							currentCoub.value = currentCoub.references.indexOf(coub.id);
+						}else{
+							console.log(false);
+						}
 
 						if (video.readyState !== 4 || audio.readyState !== 4) {
 							requestPlayback = true;
@@ -136,13 +145,17 @@
 
 <style>
 	.wrapper {
+		max-width: 80%;
+
 		position: relative;
+		margin: 0 auto;
 	}
 
 	video {
-		max-height: 800px;
+		max-height: 90vh;
 		height: auto;
-
 		width: 100%;
+
+		background: black;
 	}
 </style>

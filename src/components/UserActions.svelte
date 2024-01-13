@@ -18,7 +18,7 @@
 	$: bookmarked = coub.favourite, enableButtons();
 	$: disliked = coub.dislike, enableButtons();
 
-	const onSubmit = (event: SubmitEvent) => {
+	const onSubmit = () => {
 		disableButtons();
 	};
 

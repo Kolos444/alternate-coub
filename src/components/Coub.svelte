@@ -1,19 +1,30 @@
 <script lang="ts">
 	import type {Coub, CurrentCoub} from "$lib/types";
-	import VideoPlayer from "./VideoPlayer.svelte";
 	import Tags from "./Tags.svelte";
+	import VideoPlayer from "./VideoPlayer.svelte";
 
 	export let coub: Coub;
 	export let path: string;
 	export let loggedIn = false;
 	export let autoPlay = true;
 	export let currentCoub: CurrentCoub | undefined = undefined;
+
+	let container: HTMLDivElement;
+	export function getCoubContainer() {
+		return container;
+	}
+
+	let videoPlayer : VideoPlayer;
+	export function getVideoPlayer() {
+		return videoPlayer;
+	}
+
 </script>
 
 <svelte:options accessors={true}/>
 
-<div class="container">
-	<VideoPlayer {coub} {path} loggedIn={loggedIn} autoPlay={autoPlay} {currentCoub}/>
+<div class="container" bind:this={container}>
+	<VideoPlayer {coub} {path} loggedIn={loggedIn} autoPlay={autoPlay} {currentCoub} bind:this={videoPlayer}/>
 	<div class="row--one">
 		<a href="/coub/{coub.permalink}"><h1>{coub.title}</h1></a>
 	</div>
@@ -42,8 +53,9 @@
 
 <style>
 	.container {
-		width: 80%;
+		width: 100%;
 		margin: 0 auto;
+		min-height: 50vh;
 	}
 
 	.row--one, .row--two {

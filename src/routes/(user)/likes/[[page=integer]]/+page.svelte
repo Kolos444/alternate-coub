@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Coub from "../../../../components/Coub.svelte";
-	import type {CurrentCoub} from "$lib/types";
 	import Timeline from "../../../../components/Timeline.svelte";
 
 	export let data;
