@@ -4,6 +4,7 @@
 	import {volume} from "../stores";
 	import VideoPlayerActions from "./VideoPlayerActions.svelte";
 	import {onMount} from "svelte";
+	import {playerWidth, startPlaybackAtPercent} from "$lib/stores/settings";
 
 	export let coub: Coub;
 	export let path: string;
@@ -117,7 +118,7 @@
 					}
 				}
 				, {
-					threshold: .6
+					threshold: $startPlaybackAtPercent
 				});
 			observer.observe(video);
 		}
@@ -127,7 +128,7 @@
 
 <svelte:options accessors={true}/>
 
-<div class="wrapper">
+<div class="wrapper" style="max-width: {$playerWidth*100}%">
 	<video loop bind:this={video} on:click={playPause} on:canplaythrough={videoReadyEvent}>
 
 		<source src={coub.file_versions.html5.video.high.url}>
