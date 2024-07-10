@@ -4,6 +4,7 @@
 	import {volume} from "../stores";
 	import VideoPlayerActions from "./VideoPlayerActions.svelte";
 	import {onMount} from "svelte";
+	import {playerWidth, startPlaybackAtPercent} from "$lib/stores/settings";
 
 	export let coub: Coub;
 	export let path: string;
@@ -13,6 +14,10 @@
 
 	let video: HTMLVideoElement;
 	let audio: HTMLAudioElement;
+
+	export const getVideoElement = () => {
+		return video;
+	};
 
 	let requestPlayback = false;
 
@@ -53,7 +58,7 @@
 	/**
 	 * Starts playing Coub if paused and pauses if already playing.
 	 */
-	const playPause = () => {
+	export const playPause = () => {
 
 		if (video.paused) {
 			if (video.readyState === 4 && audio.readyState === 4) {
@@ -82,12 +87,17 @@
 		})();
 
 	onMount(() => {
+		console.log("test");
 		if (autoPlay) {
 			const observer = new IntersectionObserver(
 				(entries,) => {
 					if (entries[0].isIntersecting) {
-						if (currentCoub)
-							currentCoub.value = currentCoub?.references.indexOf(coub.id);
+						if (currentCoub) {
+							console.log("test",currentCoub.references.indexOf(coub.id),currentCoub,coub.id);
+							currentCoub.value = currentCoub.references.indexOf(coub.id);
+						}else{
+							console.log(false);
+						}
 
 						if (video.readyState !== 4 || audio.readyState !== 4) {
 							requestPlayback = true;
@@ -108,7 +118,7 @@
 					}
 				}
 				, {
-					threshold: .6
+					threshold: $startPlaybackAtPercent
 				});
 			observer.observe(video);
 		}
@@ -118,7 +128,7 @@
 
 <svelte:options accessors={true}/>
 
-<div class="wrapper">
+<div class="wrapper" style="max-width: {$playerWidth*100}%">
 	<video loop bind:this={video} on:click={playPause} on:canplaythrough={videoReadyEvent}>
 
 		<source src={coub.file_versions.html5.video.high.url}>
@@ -136,13 +146,17 @@
 
 <style>
 	.wrapper {
+		max-width: 80%;
+
 		position: relative;
+		margin: 0 auto;
 	}
 
 	video {
-		max-height: 800px;
+		max-height: 90vh;
 		height: auto;
-
 		width: 100%;
+
+		background: black;
 	}
 </style>

@@ -1,39 +1,67 @@
 <script lang="ts">
 	import type {CurrentCoub, Root} from "$lib/types";
 	import Coub from "./Coub.svelte";
+	import {page} from "$app/stores";
+	import {goto} from "$app/navigation";
 
 	export let data: { root: Root | undefined, page: number, validToken: boolean };
 	let currentCoub: CurrentCoub = {value: 0, references: []};
+	let coubs: Coub[] = [];
 
+	$: $page, data.root?.coubs.forEach((value, index) => {
+		currentCoub.references[index] = value.id;
+	});
+
+
+	let pathWithoutPage = $page.url.pathname.lastIndexOf("/") > 0 ?
+		$page.url.pathname.slice(0, $page.url.pathname.slice(1).lastIndexOf("/") + 1) :
+		$page.url.pathname;
+
+	const scrollBehaviour: ScrollIntoViewOptions = {
+		behavior: "smooth",
+		block: "center",
+		inline: "start"
+	};
 
 	const onKeyDown = (e: KeyboardEvent) => {
 		switch (e.code) {
 			default:
 				break;
 			case "ArrowUp":
+			case "KeyW":
 				e.preventDefault();
-				coubs[currentCoub.value - 1].getCoubContainer().scrollIntoView();
+				coubs[currentCoub.value - 1].getVideoPlayer().getVideoElement().scrollIntoView(scrollBehaviour);
+				console.log(currentCoub.value);
 				break;
 			case "ArrowDown":
+			case "KeyS":
 				e.preventDefault();
-				coubs[currentCoub.value + 1].getCoubContainer().scrollIntoView();
+				coubs[currentCoub.value + 1].getVideoPlayer().getVideoElement().scrollIntoView(scrollBehaviour);
+				console.log(currentCoub.value);
 				break;
 			case "ArrowLeft":
-				e.preventDefault();
-				if (1 >= data.page)
+			case "KeyA":
+				if (data.page <= 1)
 					break;
+				e.preventDefault();
+				goto(`${pathWithoutPage}/${data.page - 1}`);
 				break;
 			case "ArrowRight":
+			case "KeyD":
 				e.preventDefault();
+				console.log(pathWithoutPage, data.page);
+				goto(`${pathWithoutPage}/${data.page + 1}`);
+				break;
+			case "MediaPlayPause":
+			case "Space":
+				e.preventDefault();
+				coubs[currentCoub.value].getVideoPlayer().playPause();
+				break;
+			case "Backspace":
+				coubs[currentCoub.value].getVideoPlayer().resetCoub();
 				break;
 		}
 	};
-
-	let coubs: Coub[] = [];
-
-	data.root?.coubs.forEach((value, index) => {
-		currentCoub.references[index] = value.id;
-	});
 </script>
 
 <svelte:window on:keydown={onKeyDown}/>
@@ -45,12 +73,17 @@
 				{#if i !== 0}
 					<hr/>
 				{/if}
-				<Coub coub={coub} path="../" loggedIn={data.validToken} autoPlay={true} currentCoub={currentCoub}
+				<Coub {coub} path={$page.url.origin} loggedIn={data.validToken} autoPlay={true} {currentCoub}
 					  bind:this={coubs[i]}/>
 			{/key}
 		{/each}
 	{/if}
 </div>
+
+{#if data.page > 1}
+	<a href="{`${pathWithoutPage}/${data.page - 1}`}">Previous</a>
+{/if}
+<a href="{`${pathWithoutPage}/${data.page + 1}`}">Next</a>
 
 <style>
 	div {

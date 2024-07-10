@@ -1,30 +1,43 @@
 <script lang="ts">
 	import type {Coub, CurrentCoub} from "$lib/types";
-	import VideoPlayer from "./VideoPlayer.svelte";
 	import Tags from "./Tags.svelte";
+	import VideoPlayer from "./VideoPlayer.svelte";
 
 	export let coub: Coub;
 	export let path: string;
 	export let loggedIn = false;
 	export let autoPlay = true;
 	export let currentCoub: CurrentCoub | undefined = undefined;
+
+	let container: HTMLDivElement;
+	export function getCoubContainer() {
+		return container;
+	}
+
+	let videoPlayer : VideoPlayer;
+	export function getVideoPlayer() {
+		return videoPlayer;
+	}
+
 </script>
 
 <svelte:options accessors={true}/>
 
-<div class="container">
-	<VideoPlayer coub={coub} path={path} loggedIn={loggedIn} autoPlay={autoPlay} currentCoub={currentCoub}/>
+<div class="container" bind:this={container}>
+	<VideoPlayer {coub} {path} loggedIn={loggedIn} autoPlay={autoPlay} {currentCoub} bind:this={videoPlayer}/>
 	<div class="row--one">
 		<a href="/coub/{coub.permalink}"><h1>{coub.title}</h1></a>
 	</div>
 	<div class="row--two">
-		<Tags coub={coub}/>
-		<div>{ (coub.likes_count / (coub.likes_count + coub.dislikes_count)).toLocaleString("de-DE", {
-			style: "percent",
-			minimumFractionDigits: 2,
-			maximumFractionDigits: 2,
-		})}
-		</div>
+		<Tags {coub}/>
+		{#if coub.dislikes_count}
+			<div>{ (coub.likes_count / (coub.likes_count + coub.dislikes_count)).toLocaleString("de-DE", {
+				style: "percent",
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2,
+			})}
+			</div>
+		{/if}
 		<div>Uploaded by: {coub.channel.title}</div>
 		<div class="views-container">Views: {coub.views_count.toLocaleString("de-DE")}</div>
 		<a href="https://coub.com/view/{coub.permalink}" target="_blank">
@@ -42,13 +55,22 @@
 
 <style>
 	.container {
-		width: 80%;
+		width: 100%;
 		margin: 0 auto;
+		min-height: 50vh;
 	}
 
 	.row--one, .row--two {
 		margin: 0 auto;
 		width: max-content;
+	}
+
+	.row--one {
+		margin-bottom: 0.5rem;
+	}
+
+	h1 {
+		margin: 0;
 	}
 
 	.row--two {
@@ -61,7 +83,5 @@
 		align-items: center;
 	}
 
-	h1 {
-		margin: 0;
-	}
+
 </style>

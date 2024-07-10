@@ -5,7 +5,7 @@ export const load: PageServerLoad = async ({fetch, params, setHeaders, cookies})
 
 	const json: Root = await (
 		await fetch(
-			`https://coub.com/api/v2/timeline/subscriptions/weekly?page=1&per_page=25&page=${params.page}`, cookies.get("remember_token") ? {
+			`https://coub.com/api/v2/timeline/subscriptions/weekly?per_page=25&page=${params.page}`, cookies.get("remember_token") ? {
 				headers: {
 					Cookie: `remember_token=${cookies.get("remember_token")}`
 				}
@@ -13,5 +13,5 @@ export const load: PageServerLoad = async ({fetch, params, setHeaders, cookies})
 		)
 	).json();
 
-	return {root: json, validToken: !!cookies.get("remember_token"), page: 1};
+	return {root: json, validToken: !!cookies.get("remember_token"), page: Number(params.page || 1)};
 };
