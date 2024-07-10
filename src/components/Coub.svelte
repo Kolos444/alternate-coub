@@ -30,12 +30,14 @@
 	</div>
 	<div class="row--two">
 		<Tags {coub}/>
-		<div>{ (coub.likes_count / (coub.likes_count + coub.dislikes_count)).toLocaleString("de-DE", {
-			style: "percent",
-			minimumFractionDigits: 2,
-			maximumFractionDigits: 2,
-		})}
-		</div>
+		{#if coub.dislikes_count}
+			<div>{ (coub.likes_count / (coub.likes_count + coub.dislikes_count)).toLocaleString("de-DE", {
+				style: "percent",
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2,
+			})}
+			</div>
+		{/if}
 		<div>Uploaded by: {coub.channel.title}</div>
 		<div class="views-container">Views: {coub.views_count.toLocaleString("de-DE")}</div>
 		<a href="https://coub.com/view/{coub.permalink}" target="_blank">
