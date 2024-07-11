@@ -5,11 +5,11 @@
 </script>
 
 <div class="tags">
-	<a href="#">
+	<a href="/category/{coub.categories[0].permalink}">
 		<div class="category-container">{coub.categories[0].title}</div>
 	</a>
 	{#each coub.tags as tag}
-		<a href="#">
+		<a href="/tag/{tag.value}/likes">
 			<div class="tag-container">
 				{tag.title}
 			</div>
