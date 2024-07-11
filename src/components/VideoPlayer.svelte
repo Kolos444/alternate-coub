@@ -89,7 +89,7 @@
 	onMount(() => {
 		if (autoPlay) {
 			const observer = new IntersectionObserver(
-				(entries,) => {
+				(entries) => {
 					if (entries[0].isIntersecting) {
 						if (currentCoub) {
 							currentCoub.value = currentCoub.references.indexOf(coub.id);
@@ -114,7 +114,7 @@
 					}
 				}
 				, {
-					threshold: $startPlaybackAtPercent
+					threshold: $startPlaybackAtPercent,
 				});
 			observer.observe(video);
 		}
@@ -131,8 +131,10 @@
 		<source src={coub.file_versions.html5.video.med.url}>
 
 		<audio bind:this={audio} on:ended={resetCoub} on:canplaythrough={audioReadyEvent}>
-			<source src={coub.file_versions.html5.audio.high.url}>
-			<source src={coub.file_versions.html5.audio.med.url}>
+			{#if coub.file_versions.html5.audio} <!-- Dont ask me why this is necessary -->
+				<source src={coub.file_versions.html5.audio.high.url}>
+				<source src={coub.file_versions.html5.audio.med.url}>
+			{/if}
 		</audio>
 
 		<track src="" kind="captions">

@@ -9,7 +9,7 @@
 		<div class="category-container">{coub.categories[0].title}</div>
 	</a>
 	{#each coub.tags as tag}
-		<a href="/tag/{tag.value}">
+		<a href="/tag/{tag.value}/likes">
 			<div class="tag-container">
 				{tag.title}
 			</div>

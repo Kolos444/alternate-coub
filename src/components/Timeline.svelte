@@ -12,15 +12,12 @@
 		currentCoub.references[index] = value.id;
 	});
 
-
-	let pathWithoutPage = $page.url.pathname.lastIndexOf("/") > 0 ?
-		$page.url.pathname.slice(0, $page.url.pathname.slice(1).lastIndexOf("/") + 1) :
-		$page.url.pathname;
+	let pathWithoutPage = $page.url.pathname.replace(/\/\d/, "");
 
 	const scrollBehaviour: ScrollIntoViewOptions = {
 		behavior: "smooth",
 		block: "center",
-		inline: "start"
+		inline: "start",
 	};
 
 	const onKeyDown = (e: KeyboardEvent) => {

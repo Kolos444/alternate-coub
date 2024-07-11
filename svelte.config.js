@@ -1,5 +1,5 @@
 import adapter from '@sveltejs/adapter-auto';
-import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import {vitePreprocess} from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -14,10 +14,13 @@ const config = {
 		adapter: adapter({
 			routes: {
 				include: ['/*'],
-				exclude: ['<all>']
-			}
-		})
-	}
+				exclude: ['<all>'],
+			},
+		}),
+		alias: {
+			$components: 'src/components',
+		},
+	},
 };
 
 export default config;
