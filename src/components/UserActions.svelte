@@ -34,8 +34,6 @@
 			dislikeButton.disabled = false;
 		}
 	};
-
-	console.log(coub);
 </script>
 
 <form method="POST" use:enhance on:submit={onSubmit}>

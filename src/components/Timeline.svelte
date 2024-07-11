@@ -31,13 +31,11 @@
 			case "KeyW":
 				e.preventDefault();
 				coubs[currentCoub.value - 1].getVideoPlayer().getVideoElement().scrollIntoView(scrollBehaviour);
-				console.log(currentCoub.value);
 				break;
 			case "ArrowDown":
 			case "KeyS":
 				e.preventDefault();
 				coubs[currentCoub.value + 1].getVideoPlayer().getVideoElement().scrollIntoView(scrollBehaviour);
-				console.log(currentCoub.value);
 				break;
 			case "ArrowLeft":
 			case "KeyA":
@@ -49,7 +47,6 @@
 			case "ArrowRight":
 			case "KeyD":
 				e.preventDefault();
-				console.log(pathWithoutPage, data.page);
 				goto(`${pathWithoutPage}/${data.page + 1}`);
 				break;
 			case "MediaPlayPause":

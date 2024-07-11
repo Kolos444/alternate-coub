@@ -87,16 +87,12 @@
 		})();
 
 	onMount(() => {
-		console.log("test");
 		if (autoPlay) {
 			const observer = new IntersectionObserver(
 				(entries,) => {
 					if (entries[0].isIntersecting) {
 						if (currentCoub) {
-							console.log("test",currentCoub.references.indexOf(coub.id),currentCoub,coub.id);
 							currentCoub.value = currentCoub.references.indexOf(coub.id);
-						}else{
-							console.log(false);
 						}
 
 						if (video.readyState !== 4 || audio.readyState !== 4) {
