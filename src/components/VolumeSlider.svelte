@@ -7,13 +7,13 @@
 		if (e.deltaY < 0) {
 			if ($volume < 0.99)
 				$volume += 0.01;
-			else    //prevents it from going over 1
+			else //prevents it from going over 1
 				$volume = 1;
 		} else if (e.deltaY > 0) {
-			if ($volume > 0.01)
-				$volume -= 0.01;
-			else    //prevents it from going under 0
+			if ($volume < 0.011) //prevents it from going under 0
 				$volume = 0;
+			else
+				$volume -= 0.01;
 		}
 	};
 </script>
@@ -32,7 +32,7 @@
 
 <style>
 	input {
-		height: 300px;
+		height: 20rem;
 		max-height: 20%;
 
 		/*Orient input vertically on Chrome, Edge and Safari*/
@@ -40,10 +40,5 @@
 		writing-mode: bt-lr;
 
 		accent-color: blue;
-	}
-
-	.container {
-		background: rgba(0, 0, 0, 0.2);
-		border-radius: 1rem;
 	}
 </style>

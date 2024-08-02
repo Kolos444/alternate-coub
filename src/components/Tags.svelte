@@ -25,6 +25,8 @@
 		flex-wrap: wrap;
 		align-items: center;
 		gap: 0.5rem;
+		overflow: hidden;
+		height: 1.5rem;
 	}
 
 	.tag-container, .category-container {

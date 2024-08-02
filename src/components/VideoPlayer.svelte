@@ -124,7 +124,7 @@
 
 <svelte:options accessors={true}/>
 
-<div class="wrapper" style="max-width: {$playerWidth*100}%">
+<div class="wrapper">
 	<video loop bind:this={video} on:click={playPause} on:canplaythrough={videoReadyEvent}>
 
 		<source src={coub.file_versions.html5.video.high.url}>
@@ -144,17 +144,15 @@
 
 <style>
 	.wrapper {
-		max-width: 80%;
-
 		position: relative;
 		margin: 0 auto;
+		display: flex;
+		width: 100%;
 	}
 
 	video {
-		max-height: 90vh;
 		height: auto;
 		width: 100%;
-
 		background: black;
 	}
 </style>

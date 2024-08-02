@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Hot - 1 Month</title>
 	<meta name="description"
 		  content="This is an alternate Frontend for the Website Coub, optimised for a
 		  nice desktop experience. Watch your bookmarks on this page."/>
