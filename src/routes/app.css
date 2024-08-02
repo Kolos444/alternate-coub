@@ -1,0 +1,47 @@
+body {
+	font-family: sans-serif;
+	box-sizing: border-box;
+	margin: 0;
+}
+
+a {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+html {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+
+	&::-webkit-scrollbar {
+		background: transparent; /* Chrome/Safari/Webkit */
+		width: 0;
+	}
+
+	@media only screen and (min-width: 1280px) and (max-width: 1919px) {
+		font-size: 0.66666666666666666666666666666667rem;
+	}
+
+	@media only screen and (min-width: 1920px) and (max-width: 2559px) {
+		font-size: 1rem;
+	}
+
+	@media only screen and (min-width: 2560px) and (max-width: 2879px) {
+		font-size: 1.3333333333333333333333333333333rem;
+	}
+
+	@media only screen and (min-width: 2880px) and (max-width: 3839px) {
+		font-size: 1.5rem;
+	}
+
+	@media only screen and (min-width: 3840px) {
+		font-size: 2rem;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	html {
+		color-scheme: dark;
+		color: whitesmoke;
+	}
+}

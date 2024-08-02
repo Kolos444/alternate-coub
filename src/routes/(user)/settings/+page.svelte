@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	import {
 		hideCoubBelowPercent,
 		hideCoubBelowViews,
@@ -9,6 +8,12 @@
 		startPlaybackAtPercent
 	} from "$lib/stores/settings";
 </script>
+
+<svelte:head>
+	<title>Settings</title>
+	<meta name="description"
+		  content="Change your settings on this page."/>
+</svelte:head>
 
 <label for="coubsPerPage">Coubs per page</label>
 <select name="coubsPerPage" id="coubsPerPage">

@@ -5,10 +5,10 @@
 </script>
 
 <svelte:head>
-	<title>Bookmarks</title>
+	<title>Likes</title>
 	<meta name="description"
 		  content="This is an alternate Frontend for the Website Coub, optimised for a
-		  nice desktop experience. Watch your bookmarks on this page."/>
+		  nice desktop experience. Watch your likes on this page."/>
 </svelte:head>
 
 <Timeline data={data}/>

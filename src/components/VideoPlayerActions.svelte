@@ -17,7 +17,7 @@
 			<UserActions coub={coub} path={path}/>
 		{/if}
 		<button on:click={resetFunction}>
-			<svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path fill-rule="evenodd" clip-rule="evenodd"
 					  d="M15.707 8.707a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L14.414 12H16a5.5 5.5 0 11-5.5 5.5 1 1 0 10-2 0A7.5 7.5 0 1016 10h-1.586l1.293-1.293z"
 					  fill="#fff"></path>
@@ -31,21 +31,22 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-
-		opacity: 0;
-
-		transition: .3s;
 	}
 
 	.hover {
 		position: absolute;
 		right: 0;
-		top: 0;
+		top: 4rem;
 
 		padding: 1rem;
+		background: rgba(0, 0, 0, 0.4);
+		border-radius: 999px;
+
+		transition: .3s;
+		opacity: 0;
 	}
 
-	.hover:hover .container {
+	.hover:hover {
 		opacity: 1;
 	}
 
@@ -59,5 +60,10 @@
 	button:hover {
 		background: rgba(34, 34, 34, 0.2);
 		border-radius: 50%;
+	}
+
+	svg {
+		height: 2rem;
+		width: 2rem;
 	}
 </style>

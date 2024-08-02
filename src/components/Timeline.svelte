@@ -17,7 +17,7 @@
 	const scrollBehaviour: ScrollIntoViewOptions = {
 		behavior: "smooth",
 		block: "center",
-		inline: "start",
+		inline: "center",
 	};
 
 	const onKeyDown = (e: KeyboardEvent) => {
@@ -27,12 +27,12 @@
 			case "ArrowUp":
 			case "KeyW":
 				e.preventDefault();
-				coubs[currentCoub.value - 1].getVideoPlayer().getVideoElement().scrollIntoView(scrollBehaviour);
+				coubs[currentCoub.value - 1].getCoubContainer().scrollIntoView(scrollBehaviour);
 				break;
 			case "ArrowDown":
 			case "KeyS":
 				e.preventDefault();
-				coubs[currentCoub.value + 1].getVideoPlayer().getVideoElement().scrollIntoView(scrollBehaviour);
+				coubs[currentCoub.value + 1].getCoubContainer().scrollIntoView(scrollBehaviour);
 				break;
 			case "ArrowLeft":
 			case "KeyA":
@@ -80,7 +80,4 @@
 <a href="{`${pathWithoutPage}/${data.page + 1}`}">Next</a>
 
 <style>
-	div {
-		margin: 1rem
-	}
 </style>
